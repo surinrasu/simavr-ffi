@@ -1,3 +1,3 @@
 # 1.2.1
 
-- Update simavr (e2ce7f1cbe3ccb77484903d502465a9be65700fd -> 7aaf8a61ad8a2c04926793c5e69088fea5be4147)
+- Upgraded simavr to `7aaf8a61ad8a2c04926793c5e69088fea5be4147`.
