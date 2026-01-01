@@ -1,3 +1,7 @@
+# 1.2.3
+
+- Upgraded simavr to `a6fc4cc754ebf4ffb1e615ba7c2ab8a6d6f8b967`.
+
 # 1.2.2
 
 - Upgraded simavr to `e77a8b68584181d55eac33b76f7ea6884ae487f4`.
