@@ -70,13 +70,20 @@ fn build(out: &Path) {
 fn build_unix(out: &Path) {
     let out_simavr = out.join("simavr");
 
-    let result = Command::new("make")
-        .current_dir(out_simavr.join("simavr"))
-        .env("OBJ", out_simavr.as_os_str())
-        .arg("-e")
-        .arg("libsimavr")
-        .status()
-        .expect("Couldn't build simavr");
+    let mut make = Command::new("make");
+    make.current_dir(out_simavr.join("simavr"))
+        .env_remove("CPPFLAGS")
+        .env_remove("CFLAGS")
+        .env_remove("LDFLAGS")
+        .arg(format!("OBJ={}", out_simavr.display()))
+        .arg("libsimavr");
+
+    #[cfg(target_os = "macos")]
+    if env::var_os("HOMEBREW_PREFIX").is_none() && Path::new("/opt/homebrew").is_dir() {
+        make.env("HOMEBREW_PREFIX", "/opt/homebrew");
+    }
+
+    let result = make.status().expect("Couldn't build simavr");
 
     if !result.success() {
         panic!("Couldn't build simavr: `make` failed");
